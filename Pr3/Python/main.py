@@ -1,17 +1,16 @@
 import itertools
 import time
-import LeerFichero
-import lista
+import etc
 
-path = LeerFichero.obtenerPath()
+path = etc.obtenerPath()
 
-fichero = LeerFichero.abrirFichero(path)
+fichero = etc.abrirFichero(path)
 
 print ("--------------------------------------------")
 
-for linea in LeerFichero.lectura(fichero):
+for linea in etc.lectura(fichero):
 
-    lst = lista.lstStringToInt(linea)
+    lst = etc.lstStringToInt(linea)
     # maximo contiene el valor mas grande encontrado hasta el momento
     maximo = 0
     # Hacemos una primera medida del time clock
@@ -20,13 +19,13 @@ for linea in LeerFichero.lectura(fichero):
     for permutacion in itertools.permutations(lst):
 
         # Construimos el numero a partir de la lista permutada
-        n = lista.lstToInt(permutacion)
+        n = etc.lstToInt(permutacion)
         # Comprobamos si el nuevo n es mayor que maximo
         if n > maximo:
             maximo = n
     # Hacemos la segunda llamada al time.clock para calcular el tiempo que se tarda en hacer las permutaciones
-    print ("Tiempo => "), (time.clock()), ("s")
+    etc.paraTimer()
     print ("Mayor Permutacion => "), (maximo)
     print ("--------------------------------------------")
 
-LeerFichero.cerrarFichero(fichero)
+etc.cerrarFichero(fichero)
