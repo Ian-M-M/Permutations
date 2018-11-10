@@ -19,21 +19,21 @@ public class Main {
         while((linea = br.readLine()) != null){
             String [] elementos = linea.split(",");//elementos obtenidos del fichero
             ComienzaTimer();//Comenzamos a contar el tiempo de ejecucion
-            BigInteger maximo = clase.Iterador(elementos);//iterador
+            long maximo = clase.Iterador(elementos);//iterador
             ParaTimer();//Calculamos el tiempo de ejecucion
             Output(elementos, maximo);//info a imprimir por pantalla
         }
         br.close();
     }    
     
-    public BigInteger Iterador (String [] elementos){
+    public long Iterador (String [] elementos){
         int[] indices; // orden a mostrar de elementos
         Permutator p = new Permutator (elementos.length);
-        BigInteger maximo = BigInteger.ZERO;
+        long maximo = 0;
         while (p.hasMore ()) {
-            indices = p.getNext ();
-            BigInteger n = lstToBigInteger(elementos, indices);
-            if(n.compareTo(maximo) > 0){// comprobamos si el nuevo n es mayor que maximo
+            indices = p.getNext ();// obtenemos el orden que da lugar a la permutacion
+            long n = ToLong(elementos, indices);
+            if(n > maximo){// comprobamos si el nuevo n es mayor que maximo
                 maximo = n;
             }
         }

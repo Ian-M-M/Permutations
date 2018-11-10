@@ -20,17 +20,17 @@ public class etc {
     
     // LST OPERATIONS //////////////////////////////////////////////////////////
     
-    public static BigInteger lstToBigInteger(String [] elementos, int [] indices){
+    public static long ToLong(String [] elementos, int [] indices){
         StringBuffer permutacion = new StringBuffer();
         for (int i = 0; i < indices.length; i++) {
             permutacion.append (elementos[indices[i]]);
         }        
-        return new BigInteger(permutacion.toString());
+        return Long.parseLong(permutacion.toString());
     }
     
     // OUTPUT //////////////////////////////////////////////////////////////////
     
-    public static void Output(String [] elementos, BigInteger maximo){
+    public static void Output(String [] elementos, long maximo){
         System.out.print("Elementos [" + elementos.length + "] => { ");
         for (int i = 0; i < elementos.length; i++) {
             System.out.print(elementos[i] + " ");            

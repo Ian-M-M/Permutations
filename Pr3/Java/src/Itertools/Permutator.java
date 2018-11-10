@@ -3,8 +3,8 @@ import java.math.BigInteger;
 
 public class Permutator {
     private int[] a;
-    private BigInteger numLeft;
-    private BigInteger total;
+    private long numLeft;
+    private long total;
 
     //-----------------------------------------------------------
     // Constructor. WARNING: Don't make n too large.
@@ -30,7 +30,7 @@ public class Permutator {
         for (int i = 0; i < a.length; i++) {
           a[i] = i;
         }
-        numLeft = new BigInteger (total.toString ()); // nº de permutaciones restantes
+        numLeft = total; // nº de permutaciones restantes
     }
 
     //-----------------------------
@@ -38,17 +38,17 @@ public class Permutator {
     //-----------------------------
 
     public boolean hasMore () {
-        return numLeft.compareTo (BigInteger.ZERO) == 1;
+        return numLeft > 0;
     }
 
     //------------------
     // Compute factorial
     //------------------
 
-    private static BigInteger getFactorial (int n) {
-        BigInteger fact = BigInteger.ONE;
+    private static long getFactorial (int n) {
+        long fact = 1;
         for (int i = n; i > 1; i--) {
-          fact = fact.multiply (new BigInteger (Integer.toString (i)));
+          fact = fact * i;
         }
         return fact;
     }
@@ -58,8 +58,8 @@ public class Permutator {
     //--------------------------------------------------------
 
     public int[] getNext () {
-        if (numLeft.equals (total)) {
-          numLeft = numLeft.subtract (BigInteger.ONE);
+        if (numLeft == total) {
+          numLeft = numLeft - 1;
           return a;
         }
 
@@ -94,7 +94,7 @@ public class Permutator {
           s++;
         }
 
-        numLeft = numLeft.subtract (BigInteger.ONE);
+        numLeft = numLeft - 1;
         return a;
     }
 }
