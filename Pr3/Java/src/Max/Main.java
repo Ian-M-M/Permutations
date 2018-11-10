@@ -19,14 +19,14 @@ public class Main {
         while((linea = br.readLine()) != null){
             String [] elementos = linea.split(",");//elementos obtenidos del fichero
             ComienzaTimer();//Comenzamos a contar el tiempo de ejecucion
-            long maximo = clase.Iterador(elementos);//iterador
+            long maximo = clase.BruteForce(elementos);//iterador
             ParaTimer();//Calculamos el tiempo de ejecucion
             Output(elementos, maximo);//info a imprimir por pantalla
         }
         br.close();
     }    
     
-    public long Iterador (String [] elementos){
+    public long BruteForce (String [] elementos){
         int[] indices; // orden a mostrar de elementos
         Permutator p = new Permutator (elementos.length);
         long maximo = 0;
