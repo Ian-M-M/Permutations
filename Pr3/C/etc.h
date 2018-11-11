@@ -1,5 +1,8 @@
 #ifndef _etc_h
 #define _etc_h
 int * split(char linea[]);
-size_t numElementos();
+int numElementos();
+void ComienzaTimer();
+void FinTimer();
+int numDigitos (int * elementos);
 #endif
