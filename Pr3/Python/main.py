@@ -3,7 +3,8 @@ import itertools
 
 """
     NextIteration => Calcula las permutaciones posibles de 'linea', y devuelve la N mayor de estas combinaciones,
-    siendo N => la combinacion de una permutacion tal que si linea es [1,2] N sera igual a  21.
+    siendo N => la combinacion de una permutacion tal que si linea es [1,2] N sera igual a  21.Todo esto aplicando
+    un algoritmo de fuerza bruta
 """
 def BruteForce (linea):
     lst = etc.lstStringToInt(linea)
