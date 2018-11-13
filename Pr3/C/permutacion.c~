@@ -10,19 +10,19 @@ int nDigitos;
 long BruteForce (int *elementos) {
 	int *indices = malloc(nElements*sizeof(int));
 	Permutador(nElements);
-	long long maximo = 0;
-	long long valor = 0;
+	long maximo = 0;
+	long valor = 0;
 	while(hasMore()) {
-		//printf("Antes %ld\n", valor);
-		indices = getNext();
-		valor = ToLong(elementos,indices,nElements,nDigitos);
-		//printf("%ld\n", valor);
+		printf("Antes %ld\n", valor);
+		*indices = getNext();
+		valor = (long)ToLong(elementos,*indices,nElements,nDigitos);
+		printf("%ld\n", valor);
 		if (valor > maximo) {
                 	maximo = valor;
             	}
-		//printf("Despues %ld\n", valor);
+		printf("Despues %ld\n", valor);
 	}
-	printf("%ld\n", maximo);
+	//printf("%ld\n", maximo);
 	return maximo;
 }
 
@@ -31,9 +31,9 @@ int main (void) {
 	size_t i;
 	static const char nombreFichero[] = "../Permutaciones.txt";
   	FILE *fichero = fopen(nombreFichero, "r");
-
+	
    	if (fichero != NULL) {
-      		char linea[128];
+      		char linea[128]; 
       		while ( fgets(linea, sizeof linea, fichero ) != NULL) {
 			elementos = split(linea);
 			nElements = numElementos();
@@ -48,10 +48,10 @@ int main (void) {
 			*/
 			//printf("\n");
       		}
-
+		
       		fclose(fichero);
    	} else {
-      		perror(nombreFichero);
+      		perror(nombreFichero); 
 		return (-1);
    	}
 	return(0);
