@@ -9,15 +9,7 @@ def lstStringToInt(linea):
     lst = linea.split(",")
     # Lista de strings a lista de integers
     lst = [int(i) for i in lst]
-    mostrarlst(lst)
     return lst
-
-"""
-    mostrarlst(lst) => muestra la cantidad de elementos de 'lst'
-    y el contenido
-"""
-def mostrarlst(lst):
-    print ("n elem => "), (len(lst)), (" => "), (lst)
 
 """
     lstToInt(permutacion) => Convierte la lista 'permutacion' a
@@ -31,14 +23,21 @@ def lstToInt(permutacion):
     obtenerPath => Obtiene el path del fichero de lectura
     del que obtendremos los valores a permutar 
 """
-def obtenerPath():
+def obtenerPath(path):
     """"
      'os.path.pardir' => Cambias el directorio de trabajo a la
      carpeta padre donde esta el archivo de lectura
      'os.path.join' => Construimos el path que accede al archivo de lectura
     """
-    path = os.path.join(os.path.pardir, "Permutaciones.txt")
+    if path == "":
+        path = os.path.join(os.path.pardir, "Permutaciones.txt")
+    else:
+        path = os.path.abspath(path)
     return path
+
+def obtnerArchivo(path):
+    return os.path.basename(path)
+
 """
     abrirFichero => Abre el fichero de lectura
 """
