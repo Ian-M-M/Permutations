@@ -29,11 +29,7 @@ def obtenerPath(path):
      carpeta padre donde esta el archivo de lectura
      'os.path.join' => Construimos el path que accede al archivo de lectura
     """
-    if path == "":
-        path = os.path.join(os.path.pardir, "Permutaciones.txt")
-    else:
-        path = os.path.abspath(path)
-    return path
+    return os.path.abspath(path)
 
 def obtnerArchivo(path):
     return os.path.basename(path)

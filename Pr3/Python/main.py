@@ -10,9 +10,9 @@ import itertools
 
 def ProcesaArgumentos():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--time", action='store_true',
+    parser.add_argument("-t","--time", action='store_true',
                         help="Muestra el tiempo que se tarda en ejecutar dichas hacer las permutaciones.")
-    parser.add_argument("-f", "--file",
+    parser.add_argument("-f", "--file", required=True,
                         help="Se usara F para calcular las permutaciones y ejecutar el programa.")
     parser.add_argument("-di", action='store_true',
                         help="Muestra el contenido del input.")
@@ -44,8 +44,9 @@ def ProcesaArgumentos():
 """
 
 
-def BruteForce(linea):
-    lst = etc.lstStringToInt(linea)
+
+def BruteForce(lst):
+
     # maximo contiene el valor mas grande encontrado hasta el momento
     maximo = 0
 
@@ -58,6 +59,29 @@ def BruteForce(linea):
             maximo = n
     return maximo
 
+def optDo(linea):
+    lst = etc.lstStringToInt(linea)
+    print "n elementos => ", lst
+    if flagT == 1:
+        # Hacemos una primera medida del time clock
+        etc.time.clock()
+    maximo = BruteForce(lst)
+
+    if flagT == 1:
+        # Hacemos la segunda llamada al time.clock para calcular el tiempo que se tarda en hacer las permutaciones
+        etc.paraTimer()
+    if flagDo == 1:
+        print ("Mayor Permutacion => "), (maximo)
+
+
+def optDi(fichero):
+    global path
+    print "Nombre del fichero => ",etc.obtnerArchivo(path)
+    print "-----------------------------"
+    for linea in fichero:
+        print linea.rstrip('\n')
+    etc.cerrarFichero(fichero)
+
 
 flagF = 0
 flagT = 0
@@ -66,30 +90,29 @@ flagDo = 0
 
 args = ProcesaArgumentos()
 
-path = ""
+if (flagT == 0) and (flagF == 0) and (flagDi == 0) and (flagDo == 0):
+    print "Para que el programa funciones correctemente use alguno de los comandos disponibles, 'python main.py -h'"
+    exit(1)
 
+path = ""
 if flagF != 0:
     path = args.file
 
 fichero = etc.abrirFichero(etc.obtenerPath(path))
 
-for linea in etc.lectura(fichero):
+if flagDi == 1:
+    ficheroAux = fichero
+    optDi(fichero)
+    print "-----------------------------"
 
-    # Mostramos la linea leida:
-    if flagDi == 1:
-        print etc.obtnerArchivo(path)
-        print "-----------------------------"
-        print linea
-    if flagT == 1:
-        # Hacemos una primera medida del time clock
-        etc.time.clock()
+if flagDo == 1:
 
-    maximo = BruteForce(linea)
+    fichero = etc.abrirFichero(etc.obtenerPath(path))
 
-    if flagT == 1:
-        # Hacemos la segunda llamada al time.clock para calcular el tiempo que se tarda en hacer las permutaciones
-        etc.paraTimer()
-    if flagDo == 1:
-        print ("Mayor Permutacion => "), (maximo)
+    for linea in etc.lectura(fichero):
+        if flagDo == 1:
+            optDo(linea)
+            print "-----------------------------"
 
 etc.cerrarFichero(fichero)
+
