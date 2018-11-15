@@ -3,10 +3,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <stdbool.h>
+#include <getopt.h>
 #include "etc.h"
 int tamArray;
 clock_t t0, t1;
 int i;
+char nombreFich[] = "";
+double time_taken;
+bool flagt = false;
 int * split(char linea[]) {
 	int j;
 	int i = 0;
@@ -46,8 +51,8 @@ void ComienzaTimer() {
 
 void FinTimer() {
 	t1 = clock();
-    	double time_taken = ((double) (t1 - t0) )/CLOCKS_PER_SEC;
-	printf("%f\n", time_taken);
+    	time_taken = ((double) (t1 - t0) )/CLOCKS_PER_SEC;
+	
 }
 
 long long ToLong(int * elementos, int * indices, int n, int nDigitos){
@@ -74,4 +79,74 @@ int numDigitos (int * elementos) {
 		}
 	}
 	return nDigitos;
+}
+void GetParam(int argc, char * argv[], bool * di_flag, bool * do_flag,
+		bool * f_flag, bool * t_flag, char * path) {
+	if (argc < 3){
+        	printf(" [!] ERROR. Número de argumentos incorrectos\n");
+        	exit(1);
+    	}
+	static struct option long_options[] = {
+        {"di",  no_argument,       	0,  'i' },
+        {"do", 	no_argument,       	0,  'o' },
+        {"f",   required_argument, 	0,  'f' },
+        {"t",   no_argument,		0,  't' },
+        {0,     0,                	0,  0   }
+    };
+	int long_index =0;
+	int opt = 0;
+	while ((opt = getopt_long(argc, argv,"iof:t", 
+                   long_options, &long_index )) != -1) {
+        	switch(opt) {
+            		case 'o':
+                		*do_flag = true;
+                		break;
+            		case 'i':
+                		*di_flag = true;
+                		break;
+			case 'f':
+                		*f_flag = true;
+				strcpy(nombreFich,optarg);
+				strcpy(path,optarg);
+                		break;
+			case 't':
+                		*t_flag = true;
+				flagt = true;
+                		break;
+           	 	case '?':
+          			fprintf (stderr, "[!] ERROR. Opción incorrecta `-%c'.\n", optopt);
+				exit(1);
+        	}
+	}
+}
+
+void Input(){ 
+	printf("Ruta del fichero => %s\n",nombreFich);
+	FILE *fichero = fopen(nombreFich, "r");
+	if (fichero != NULL) {
+      		char linea[128];
+      		while ( fgets(linea, sizeof linea, fichero ) != NULL) {
+			printf("%s", linea);
+      		}
+      		fclose(fichero);
+   	} else {
+      		perror(nombreFich);
+		exit(1);
+   	}
+	printf("-------------------------------------------------\n");
+}
+
+void T_Output() {
+	printf("Tiempo => %LFs\n", time_taken);
+	printf("-------------------------------------------------");
+}
+
+void Output(int * elementos, long maximo) {
+        printf("\nElementos [%d] => { ", tamArray);
+        for (i = 0; i < tamArray; i++) {
+            printf("%d ", elementos[i]);            
+        }
+        printf("}");        
+        printf("\nMaxima permutacion => %ld\n",maximo);
+     	if (!flagt) printf("-------------------------------------------------");  
 }
