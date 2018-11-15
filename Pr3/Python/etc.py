@@ -45,18 +45,26 @@ def abrirFichero(path):
     cerrarFichero => Cierra el fichero de lectura
 """
 def cerrarFichero (fichero):
-    fichero.close #:type fichero: object
+    fichero.close
 """
     lectura => Lee linea a linea el fichero de lectura
 """
 def lectura(fichero):
     for linea in fichero:
         yield linea
-"""
-"""
-def comienzaTimer():
-    return time.clock()
+
 """
 """
 def paraTimer():
     print "Tiempo => ", time.clock()," s"
+
+
+"""
+    optDi => funcion que se encarga de realizar la funcion -di, debug input.
+"""
+def optDi(fichero):
+
+    print "--------------------------------------------------"
+    for linea in fichero:
+        print linea.rstrip('\n')
+    cerrarFichero(fichero)

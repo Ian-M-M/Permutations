@@ -4,12 +4,13 @@ import etc
 import itertools
 
 """
-    ProcesaArgumentos => Funcion que procesa los argumentos que se usan al ivocar al programa.
+    ProcesaArgumentos => Funcion que procesa los argumentos que se usan al invocar al programa.
 """
-
-
 def ProcesaArgumentos():
+    # creamos el objeto que contedra las opciones
     parser = argparse.ArgumentParser()
+
+    # agregamos las opciones
     parser.add_argument("-t","--time", action='store_true',
                         help="Muestra el tiempo que se tarda en ejecutar dichas hacer las permutaciones.")
     parser.add_argument("-f", "--file", required=True,
@@ -18,9 +19,10 @@ def ProcesaArgumentos():
                         help="Muestra el contenido del input.")
     parser.add_argument("-do"   , action='store_true',
                         help="Muestra el contenido del output.")
-
+    # establecemos que queremos que actuen como opciones del programa
     args = parser.parse_args()
 
+    # establecemos que ocurrira con cada opcion, cuando esta se active.
     if args.time:
         global flagT
         flagT = 1
@@ -37,16 +39,40 @@ def ProcesaArgumentos():
     return args
 
 
+
 """
-    NextIteration => Calcula las permutaciones posibles de 'linea', y devuelve la N mayor de estas combinaciones,
-    siendo N => la combinacion de una permutacion tal que si linea es [1,2] N sera igual a  21.Todo esto aplicando
-    un algoritmo de fuerza bruta
+   optDo => funcion que se encarga de ejecutar la funcion -do y/o -t, debug output 
 """
+def optDo(linea):
+
+    # obtenemos la lista de enteros de 'linea'
+    lst = etc.lstStringToInt(linea)
+    # Comprobamos que se halla activado la opcion -do para mostrar el contenido de linea
+    if flagDo == 1:
+        print "n elementos => ", "{",
+        for i in lst:
+            print i,
+        print "}"
+
+    if flagT == 1:
+        # Hacemos una primera medida del time clock
+        etc.time.clock()
+    # Calculamos el maximo mediante fuerza bruta.
+    maximo = BruteForce(lst)
+
+    if flagT == 1:
+        # Hacemos la segunda llamada al time.clock para calcular el tiempo que se tarda en hacer las permutaciones
+        etc.paraTimer()
+    if flagDo == 1:
+        # Mostramos la mayor permutacion
+        print ("Mayor Permutacion => "), (maximo)
 
 
 
+"""
+    BruteForce => funcion que implementa el algoritmo de fuerza bruta para el problema propuesto
+"""
 def BruteForce(lst):
-
     # maximo contiene el valor mas grande encontrado hasta el momento
     maximo = 0
 
@@ -59,30 +85,8 @@ def BruteForce(lst):
             maximo = n
     return maximo
 
-def optDo(linea):
-    lst = etc.lstStringToInt(linea)
-    print "n elementos => ", lst
-    if flagT == 1:
-        # Hacemos una primera medida del time clock
-        etc.time.clock()
-    maximo = BruteForce(lst)
 
-    if flagT == 1:
-        # Hacemos la segunda llamada al time.clock para calcular el tiempo que se tarda en hacer las permutaciones
-        etc.paraTimer()
-    if flagDo == 1:
-        print ("Mayor Permutacion => "), (maximo)
-
-
-def optDi(fichero):
-    global path
-    print "Nombre del fichero => ",etc.obtnerArchivo(path)
-    print "-----------------------------"
-    for linea in fichero:
-        print linea.rstrip('\n')
-    etc.cerrarFichero(fichero)
-
-
+# flags necesarios para saber que modos se activaron
 flagF = 0
 flagT = 0
 flagDi = 0
@@ -90,29 +94,30 @@ flagDo = 0
 
 args = ProcesaArgumentos()
 
+# En caso de no tener ningun modo activado, nos salimos
 if (flagT == 0) and (flagF == 0) and (flagDi == 0) and (flagDo == 0):
     print "Para que el programa funciones correctemente use alguno de los comandos disponibles, 'python main.py -h'"
     exit(1)
 
-path = ""
-if flagF != 0:
-    path = args.file
+# tomamos la ruta del archivo
+path = args.file
 
+# abrimos el archivos
 fichero = etc.abrirFichero(etc.obtenerPath(path))
 
 if flagDi == 1:
-    ficheroAux = fichero
-    optDi(fichero)
-    print "-----------------------------"
+    print "Nombre del fichero => ", path
+    etc.optDi(fichero)
+    print "--------------------------------------------------"
 
-if flagDo == 1:
+if flagDo == 1 or flagT == 1:
 
-    fichero = etc.abrirFichero(etc.obtenerPath(path))
-
+    if flagDi == 1:
+        # si hemos activado el modo -di necesitamos abrir el fichero de nuevo
+        fichero = etc.abrirFichero(etc.obtenerPath(path))
+    # recorremos el archivo con los elementos a permutar
     for linea in etc.lectura(fichero):
-        if flagDo == 1:
-            optDo(linea)
-            print "-----------------------------"
+        optDo(linea)
+        print "--------------------------------------------------"
 
 etc.cerrarFichero(fichero)
-
