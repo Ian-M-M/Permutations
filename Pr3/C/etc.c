@@ -27,7 +27,7 @@ void FinTimer() {
 
 void GetParam(int argc, char * argv[], bool * di_flag, bool * do_flag,
 		bool * f_flag, bool * t_flag, char * p) {
-	if (argc < 2){
+	if (argc < 3){
 		printf(" [!] ERROR. Numero de argumentos incorrectos\n");
 		exit(1);
 	}

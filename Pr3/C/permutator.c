@@ -27,12 +27,11 @@ void Permutator(int n) {
 	lenght = n;
 	if (n < 1) {
 		printf("ERROR: Mínimo 1 elemento");
-		exit (1);
+		exit(1);
 	}
 	array = malloc(n * sizeof(int));
 	total = getFactorial(n);
 	reset(n);
-	return 0;
 }
 
 bool hasMore() {

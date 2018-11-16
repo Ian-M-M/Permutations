@@ -3,7 +3,7 @@
 #include <stdbool.h>
 void reset(int n);
 long getFactorial(int n);
-int Permutator(int n);
+void Permutator(int n);
 bool hasMore();
 int * getNext();
 #endif
