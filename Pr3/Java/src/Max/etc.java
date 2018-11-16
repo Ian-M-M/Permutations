@@ -5,11 +5,16 @@ import java.text.DecimalFormat;
 import javax.sound.midi.SysexMessage;
 
 public class etc {
-
-    // POINTERS ////////////////////////////////////////////////////////////////
+    // Punteros
     public static boolean f_flag=false, t_flag=false, di_flag=false, do_flag=false;
     public static String path="";
 
+
+    /*
+      GetParam(String[]args): Lee los parametros pasados al programa, por medio
+      del array "args". De esta forma se identifican y se activan los flags
+      correspondientes, que permiten activar unas operaciones u otras.
+    */
     public static void GetParam(String [] args){
         if (args.length==0) System.exit(1);
         for (int i = 0; i < args.length; i++) {
@@ -27,7 +32,11 @@ public class etc {
         }
     }
 
-    // INPUT ///////////////////////////////////////////////////////////////////
+
+    /*
+      Input(): Es llamado cuando se usa la opcion -di. Tiene la funcion de mostrar
+      por pantalla el contenido del fichero pasado al programa por parametros.
+    */
     public static void Input(){
         try{
             System.out.println(path);
@@ -44,26 +53,34 @@ public class etc {
         }
     }
 
-    // TIMERS //////////////////////////////////////////////////////////////////
-
+    // Variables para medir el tiempo
     private static long timer;
     private static double tiempoTranscurrido;
 
 
+    /*
+      ComienzaTimer(): Toma el valor del instante actual y lo guarda en "timer".
+    */
     public static void ComienzaTimer(){
         timer = System.nanoTime();
     }
 
-    
+
+    /*
+      ParaTimer(): Calcula el tiempo transcurrido desde el momento en que se
+      asigno un valor a "timer" hasta el momento actual y se guarada en la variable
+      "tiempoTranscurrido".
+    */
     public static void ParaTimer(){
         tiempoTranscurrido = (System.nanoTime() - timer)/(1000000000.);
     }
 
+
     /*
       ToLong(): usando "indices" se escogen las posiciones de los elementos del
-      conjunto "elementos" que quedan lugar a la permutacion correspondiente.
+      conjunto "elementos" que dan lugar a la permutacion correspondiente, que
+      sera devuelta con formato long.
     */
-
     public static long ToLong(String [] elementos, int [] indices){
         StringBuffer permutacion = new StringBuffer();
         for (int i = 0; i < indices.length; i++) {
@@ -72,9 +89,8 @@ public class etc {
         return Long.parseLong(permutacion.toString());
     }
 
-    // OUTPUT //////////////////////////////////////////////////////////////////
-
     public static int contador=1;//nº de veces que se llama al timer
+
 
     /*
       Output(String [] elementos, long maximo): Es llamado cuando -do ha sido
@@ -92,6 +108,7 @@ public class etc {
         if(!t_flag)System.out.println("-------------------------------------------------");
     }
 
+
     /*
       T_Output: imprime por pantalla el tiempo transcurrido desde que se llamo a
       la funcion ComienzaTimer
@@ -105,5 +122,4 @@ public class etc {
         System.out.println("Tiempo => " + df.format(tiempoTranscurrido) + "s");
         System.out.println("-------------------------------------------------");
     }
-
 }

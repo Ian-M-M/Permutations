@@ -5,6 +5,7 @@ public class Permutator {
     private long numLeft;
     private long total;
 
+
     /*
       Pemutador(int n): Crea e inicializa el array "a" de tamaño "n" igual al numero de
       elementos, que tendra las posiciones de los elementos a permutar y Calcula
@@ -17,6 +18,7 @@ public class Permutator {
         reset ();
     }
 
+
     /*
       reset(): Inicializa el array con las posiciones de la 1º permutacion.
     */
@@ -27,6 +29,7 @@ public class Permutator {
         numLeft = total; // nº de permutaciones restantes
     }
 
+
     /*
       hasMore(): Devuelve true si quedan iteraciones restantes, false en caso
       contrario.
@@ -34,6 +37,7 @@ public class Permutator {
     public boolean hasMore () {
         return numLeft > 0;
     }
+
 
     /*
       getFactorial(int n): Calcula el factorial de "n" y lo devuelve.
@@ -45,6 +49,7 @@ public class Permutator {
         }
         return fact;
     }
+
 
     /*
       getNext(): devuelve el array "a" con las posiciones permutadas de elementos.
