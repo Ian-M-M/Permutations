@@ -74,7 +74,7 @@ int main(int argc, char * argv[]){
 			if (t_flag) T_Output();	// Se muestran los tiempos 
       		free(elementos);	// Liberamos memoria
     	}
-		close(fichero);
+		pclose(fichero);
   	} else {
 		perror(path);
 		return (1);
