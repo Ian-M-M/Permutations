@@ -17,7 +17,7 @@
 
 **2. Descripción del problema a resolver:**
 
-- <p align="justify">Por medio de combinaciones sin repetición, donde si importa el orden y los elementos son cogidos de n en n, queremos obtener el mayor valor generado de entre todas las permutaciones.
+<p align="justify">Por medio de combinaciones sin repetición, donde si importa el orden y los elementos son cogidos de n en n, queremos obtener el mayor valor generado de entre todas las permutaciones.
 
 
 
@@ -60,38 +60,39 @@
  <p style="background-color:rgb(240, 240, 240);"><b><font size="5">Estrategia de Fuerza Bruta</font>
 
 
+<p align="justify" style="color: #FF6666"><b>IMPORTANTE: PARA SABER COMO COMPILAR Y EJECUTAR EN CADA LENGUAJE, VER APARTADO DE INFORMACIÓN ADICIONAL AL FINAL DEL DOCUMENTO.
+
+
 <p align="justify"><b>4. Nombre de los ficheros que contienen el algoritmo de fuerza bruta implementado
 
+- JAVA =>/Pr3/Java/src/Max/Main.java
 
-- JAVA => <span style="color: #0489B1">/Pr3/Java/src/Max/Main.java</span>
+- PYTHON => /Pr3/Python/main.py
 
-- PYTHON => <span style="color: #0489B1">/Pr3/Python/main.py</span>
-
-- C =>
+- C =>/Pr3/C/main.c
 
 
 
 <p align="justify"><b>5. Copia de pantalla del fragmento de código que implementa el algoritmo de fuerza bruta (en los 3 lenguajes).
-- JAVA
 
+- JAVA
 
 ```java
 public long BruteForce (String [] elementos){
-    int[] indices; // orden a mostrar de elementos
+    int[] indices; // orden a mostrar elementos[]
     Permutator p = new Permutator (elementos.length);
-    long maximo = 0;
+    long maximo = 0; // numero mas grande generado
+    long n = 0;
     while (p.hasMore ()) {
-        indices = p.getNext ();// obtenemos el orden que da lugar a la permutacion
-        long n = ToLong(elementos, indices);
-        if(n > maximo){// comprobamos si el nuevo n es mayor que maximo
+        indices = p.getNext (); // obtenemos el orden que da lugar a la nueva 										// permutacion
+        n = ToLong(elementos, indices); // permutacion actual
+        if(n > maximo){ // comprobamos si el nuevo n es mayor que maximo
             maximo = n;
         }
     }
     return maximo;
 }
 ```
-
-
 
 - PYTHON
 
@@ -109,27 +110,38 @@ def BruteForce (linea):
 return maximo
 ```
 
-
-
 - C
 
-```c
-
+```C
+long long BruteForce (char **elementos,int tamElementos,int * nDigElementos) {
+	int *indices = malloc(tamElementos*sizeof(int));
+	Permutator(tamElementos);
+	long long maximo = 0;
+	long long valor = 0;
+	while(hasMore()) {
+		indices = getNext();
+		valor = ToLong(elementos, indices, tamElementos, nDigElementos);
+		if (valor > maximo) {
+      		maximo = valor;
+  		}
+	}
+	return maximo;
+}
 ```
+
+
 
 
 
 <p align="justify"><b>6. Nombre de los ficheros que contienen el iterador (sólo en los lenguajes en los que hayan tenido que implementar el iterador)
 
+- JAVA =>/Pr3/Java/src/Itertools/Permutator.java
+- C =>/Pr3/C/permutator.c
 
-- JAVA <span style="color: #0489B1">/Pr3/Java/src/Itertools/Permutator.java</span>
-- C =>
 
 
 
 <p align="justify"><b>7. Explicación del iterador de permutaciones o combinaciones utilizado en cada lenguaje (en caso de haber utilizado un iterador disponible en el lenguaje, referenciar la página Web de documentación del iterador utilizado; en caso de haberlo programado, referenciar la página Web que describe el algoritmo implementado, o explicar el algoritmo implementado).
-
-
 - JAVA
 
 <p align="justify">El código del iterador fue desarrollado en base al código que se encuentra en la siguiente página web: 
@@ -147,6 +159,8 @@ http://people.rennes.inria.fr/Arnaud.Gotlieb/resources/Java_exp/min/perm.htm
 
 
 ![](C:\Users\carta\Desktop\Entrega_P3_v2\pag 436 Permutation generator.PNG)
+
+
 
 
 
@@ -250,17 +264,29 @@ else:
 
 
 
-
-
-
-
-
-
-
-
 - C 
 
 Mismo algoritmo implementado en java, pero adaptado a C.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -279,7 +305,7 @@ Formato:
 
 > Nota:
 >
-> Tanto en Java (que usa el tipo long) como en C (que usa tipo long long) para representar el valor que queremos obtener, tenemos la limitacion de que solo se pueden representar 2^63-1 numeros por encima del 0 (numeros de 19 cifras). Esto quiere decir que no podemos poner elementos cuya suma de cifras sea mayor a 18.
+> Tanto en Java (que usa el tipo long) como en C (que usa tipo long long) para representar el valor que queremos obtener, tenemos la limitación de que solo se pueden representar 2^63-1 números, por encima del 0 (numeros de 19 cifras). Dicho esto, se recomienda no usar elementos cuya suma de cifras sea mayor a 18.
 
 
 
@@ -287,8 +313,37 @@ Formato:
 
 - JAVA
 
+![java](C:\Users\carta\Desktop\Entrega_P3_v2\java.png)
+
+
+
+
+
+
+
+
+
+
+
+
 - PYTHON
+
+![python](C:\Users\carta\Desktop\Entrega_P3_v2\python.png)
+
+
+
+
 - C 
+
+![C](C:\Users\carta\Desktop\Entrega_P3_v2\C.png)
+
+
+
+
+
+
+
+
 
 
 
@@ -297,10 +352,78 @@ Formato:
 <p style="background-color:rgb(240, 240, 240)"><b><font size="5">Información adicional</font>
 
 
-Para todos los lenguages de programación escogidos, a la hora de ejecutar el programa todos tienen el factor común de que admiten los siguientes parámetros:
+- JAVA
 
-- -di: (Debug Input) Permite mostrar el contenido del fichero pasado por parámetro.
-- -f file: Indica al programa el input del que se van a obtener los conjuntos de elementos.
-- -do: (Debug Output) Permite mostrar el valor máximo obtenido combinando los elementos del conjunto.
-- -t: Permite mostrar el tiempo que se ha tardado en calcular el valor máximo.
+> Instrucciones de compilación y ejecución con Java:
+>
+> 1. COMPILACIÓN:
+>
+>    **javac -sourcepath src -d build src/\*\*/\*.java**
+>
+>    **[ -sourcepath src ]**  selecciona src como carpeta donde se encuentra el codigo fuente.
+>
+>    **[-d build src/\*\*/\*.java]** selecciona build como directorio donde se guardaran los archivos compilados y src/\*\*/\*.java indica los archivos que se quieren compilar.
+>
+> 2. EJECUCIÓN:
+>    **java -cp .:build:\*\*/\*.class Max.Main**
+>    con la instruccion anterior podemos ejecutar todos los archivos de la carpeta build, e indicarle que Max.Main es donde se encuentra el main de nuestro programa.
+>    A la derecha del Max.Main podemos indicarle diversos parámetros al programa.
+>
+>
+> 3. PARÁMETROS ADMITIDOS:
+>
+>    - **-di**: (Debug Input) Permite mostrar el contenido del fichero pasado por parámetro.
+>
+>    - **-f file**: Indica al programa el input del que se van a obtener los conjuntos de elementos.
+>
+>    - **-do**: (Debug Output) Permite mostrar el valor máximo obtenido combinando los elementos del conjunto.
+>
+>    - **-t**: Permite mostrar el tiempo que se ha tardado en calcular el valor máximo.
 
+
+
+- PYTHON
+
+> Instrucciones de ejecución con python:
+>
+> 1. INTERPRETACIÓN:
+>
+>    **python main.py** ó **python2 main.py**
+>    A la derecha del main.py van los parámetros del programa.
+>
+>
+> 2. PARÁMETROS ADMITIDOS:
+>
+>    - **-di**: (Debug Input) Permite mostrar el contenido del fichero pasado por parámetro.
+>
+>    - **-f file**: Indica al programa el input del que se van a obtener los conjuntos de elementos.
+>
+>    - **-do**: (Debug Output) Permite mostrar el valor máximo obtenido combinando los elementos del conjunto.
+>
+>    - **-t**: Permite mostrar el tiempo que se ha tardado en calcular el valor máximo.
+>    - **-h**: Despliega un menú de ayuda, que ofrece información acerca de los parámetros que se pueden utilizar.
+
+
+
+- C
+
+> Instrucciones de compilación y ejecución con C:
+>
+> 1. COMPILACIÓN:
+>
+>    **gcc \*.c -o nombre_del_programa**
+>
+> 2. EJECUCIÓN:
+>    **./nombre_del_programa**
+>    A la derecha del main.c van los parámetros del programa.
+>
+>
+> 3. PARÁMETROS ADMITIDOS:
+>
+> - **<u>--di</u>**: (Debug Input) Permite mostrar el contenido del fichero pasado por parámetro.
+>
+> - **-f file**: Indica al programa el input del que se van a obtener los conjuntos de elementos.
+>
+> - **<u>--do</u>**: (Debug Output) Permite mostrar el valor máximo obtenido combinando los elementos del conjunto.
+>
+> - **-t**: Permite mostrar el tiempo que se ha tardado en calcular el valor máximo.
