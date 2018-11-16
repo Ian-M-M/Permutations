@@ -5,10 +5,12 @@
 
 #include "permutator.h"
 
-int *array;
-long numLeft, total;
+int *array;		// Puntero de array de indices
+long numLeft, total;	// No. de permutaciones restantes, y no. total
 int i, lenght;
+
 void reset(int n) {
+	
 	for (i = 0; i < n ; i++) {
 		array[i] = i;
 	}
@@ -31,7 +33,7 @@ void Permutator(int n) {
 	}
 	array = malloc(n * sizeof(int));
 	total = getFactorial(n);
-	reset(n);
+	reset(n);	// Inicializamos array (indices)
 }
 
 bool hasMore() {
@@ -42,11 +44,12 @@ bool hasMore() {
 }
 
 int * getNext () {
+	// Primera permutacion
 	if (numLeft == total) {
 		numLeft = numLeft -1;
 		return array;
 	}
-	int temp;
+	int temp;	// Variable auxiliar 
 
 	// 1º Buscamos una j tal que a[j] < a[j+1]
 	int j = lenght - 2;

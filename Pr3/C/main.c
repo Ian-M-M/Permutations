@@ -32,18 +32,18 @@ int main(int argc, char * argv[]){
   int * nDigElementos=NULL;
   int tamElementos;
 	long maximo=0;
-	char path[]="";
+	char path[500]="";
 
 	GetParam(argc, argv, &di_flag, &do_flag, &f_flag, &t_flag, path);
 	if (!f_flag) {
 		printf("[!]ERROR. -f file requerido\n");
 		exit(1);
 	}
-
-	if (di_flag) Input();
-	if (!do_flag && !t_flag) {
-		return (0);
+	if (!di_flag && !do_flag && !t_flag ) {
+		printf("[!]ERROR. Necesitamos otra opcion\n");
+		exit(1);
 	}
+	if (di_flag) Input();
 
 	FILE *fichero = fopen(path, "r");
 
@@ -63,7 +63,6 @@ int main(int argc, char * argv[]){
 			if (t_flag) FinTimer();
 			if (do_flag) Output(elementos, maximo);
 			if (t_flag) T_Output();
-
       free(elementos);
     }
   }

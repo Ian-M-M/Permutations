@@ -6,10 +6,11 @@
 #include <string.h>
 
 #include "etc.h"
-#define MAXDIGITOS 19
+// Los tiempos se disparas si > 12
+#define MAXDIGITOS 19		//Maximo digitos aceptados
 
 clock_t t0, t1;
-char path[]="";
+char path[500]="";
 double time_taken=0;
 bool flagt = false;
 int tamElementos = 0;
