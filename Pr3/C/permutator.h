@@ -3,26 +3,27 @@
 #include <stdbool.h>
 
 /* 
-  Se reestablece el array de indices
-  rellenando con el numero de posiciones 
-  hasta n-1
+	Se reestablece el array de indices
+  	rellenando con el numero de posiciones 
+	hasta n-1
  */
 void reset(int n);
 
 /* 
-  Obtenemos el numero total de permutaciones 
-  calculando el factorial del numero de elementos
+	Obtenemos el numero total de permutaciones 
+	calculando el factorial del numero de elementos
  */
 long getFactorial(int n);
 
 /*
-  Constructor del permutador 
+	Constructor del permutador donde se inicializa 
+	
  */
 void Permutator(int n);
 
 /*
-  Devuelve un boleano indicando si faltan más
-  permutaciones por procesar
+	Devuelve un boleano indicando si faltan más
+	permutaciones por procesar
 */
 bool hasMore();
 

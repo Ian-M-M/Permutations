@@ -10,7 +10,7 @@ long numLeft, total;	// No. de permutaciones restantes, y no. total
 int i, lenght;
 
 void reset(int n) {
-	
+	// Inicializamos indices (array)
 	for (i = 0; i < n ; i++) {
 		array[i] = i;
 	}
@@ -80,5 +80,5 @@ int * getNext () {
           	s++;
 	}
 	numLeft = numLeft - 1;
-        return array;
+    return array;
 }
