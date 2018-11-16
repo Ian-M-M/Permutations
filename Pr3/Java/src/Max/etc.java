@@ -5,13 +5,13 @@ import java.text.DecimalFormat;
 import javax.sound.midi.SysexMessage;
 
 public class etc {
-    
+
     // POINTERS ////////////////////////////////////////////////////////////////
     public static boolean f_flag=false, t_flag=false, di_flag=false, do_flag=false;
     public static String path="";
-    
+
     public static void GetParam(String [] args){
-        if (args.length==0) System.exit(1);        
+        if (args.length==0) System.exit(1);
         for (int i = 0; i < args.length; i++) {
             if(args[i].equals("-f")){
                 f_flag=true;
@@ -19,14 +19,14 @@ public class etc {
             }
             if(args[i].equals("-t"))t_flag=true;
             if(args[i].equals("-di"))di_flag=true;
-            if(args[i].equals("-do"))do_flag=true;           
+            if(args[i].equals("-do"))do_flag=true;
         }
         if (!f_flag){
             System.err.println("Ha de introducir un fichero");
             System.exit(1);
         }
     }
-    
+
     // INPUT ///////////////////////////////////////////////////////////////////
     public static void Input(){
         try{
@@ -41,46 +41,61 @@ public class etc {
             System.out.println("-------------------------------------------------");
         }catch (Exception e){
             System.err.println("Error al leer input");
-        }        
-    }    
-    
+        }
+    }
+
     // TIMERS //////////////////////////////////////////////////////////////////
-    
+
     private static long timer;
     private static double tiempoTranscurrido;
-    
-    
+
+
     public static void ComienzaTimer(){
         timer = System.nanoTime();
     }
+
     
     public static void ParaTimer(){
         tiempoTranscurrido = (System.nanoTime() - timer)/(1000000000.);
     }
-    
-    // LST OPERATIONS //////////////////////////////////////////////////////////
-    
+
+    /*
+      ToLong(): usando "indices" se escogen las posiciones de los elementos del
+      conjunto "elementos" que quedan lugar a la permutacion correspondiente.
+    */
+
     public static long ToLong(String [] elementos, int [] indices){
         StringBuffer permutacion = new StringBuffer();
         for (int i = 0; i < indices.length; i++) {
             permutacion.append (elementos[indices[i]]);
-        }        
+        }
         return Long.parseLong(permutacion.toString());
     }
-    
+
     // OUTPUT //////////////////////////////////////////////////////////////////
+
     public static int contador=1;//nº de veces que se llama al timer
-    
+
+    /*
+      Output(String [] elementos, long maximo): Es llamado cuando -do ha sido
+      solicitado. Su funcion será la de imprimir por pantalla el mayor numero
+      obtenido gracias al algoritmo de fuerza bruta "maximo". Adicionalmente
+      imprime por pantalla los elementos del conjunto "elementos".
+    */
     public static void Output(String [] elementos, long maximo){
         System.out.print("Elementos [" + elementos.length + "] => { ");
         for (int i = 0; i < elementos.length; i++) {
-            System.out.print(elementos[i] + " ");            
+            System.out.print(elementos[i] + " ");
         }
-        System.out.println("}");        
+        System.out.println("}");
         System.out.println("Maxima permutacion => " + maximo);
-        if(!t_flag)System.out.println("-------------------------------------------------");  
+        if(!t_flag)System.out.println("-------------------------------------------------");
     }
-    
+
+    /*
+      T_Output: imprime por pantalla el tiempo transcurrido desde que se llamo a
+      la funcion ComienzaTimer
+    */
     public static void T_Output(){
         DecimalFormat df = new DecimalFormat("#.#########");
         if(!do_flag){
@@ -90,5 +105,5 @@ public class etc {
         System.out.println("Tiempo => " + df.format(tiempoTranscurrido) + "s");
         System.out.println("-------------------------------------------------");
     }
-    
+
 }

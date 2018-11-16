@@ -9,16 +9,12 @@ import java.text.DecimalFormat;
 
 public class Main {
 
-
-
-    
-    
     public static void main(String[] args) throws FileNotFoundException, IOException{
 
         Main clase= new Main();
-        
+
         GetParam(args);
-        
+
         if(di_flag)Input();
         if(!do_flag && !t_flag)System.exit(0);
         FileReader fichero = new FileReader(path);
@@ -35,8 +31,8 @@ public class Main {
         }
         br.close();
     }
-    
-    
+
+
         public long BruteForce (String [] elementos){
         int[] indices; // orden a mostrar de elementos
         Permutator p = new Permutator (elementos.length);

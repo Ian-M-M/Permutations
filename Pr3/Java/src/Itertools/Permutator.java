@@ -1,31 +1,25 @@
 package Itertools;
-import java.math.BigInteger;
 
 public class Permutator {
     private int[] a;
     private long numLeft;
     private long total;
 
-    //-----------------------------------------------------------
-    // Constructor. WARNING: Don't make n too large.
-    // Recall that the number of permutations is n!
-    // which can be very large, even when n is as small as 20 --
-    // 20! = 2,432,902,008,176,640,000 and
-    // 21! is too big to fit into a Java long, which is
-    // why we use BigInteger instead.
-    //----------------------------------------------------------
-
+    /*
+      Pemutador(int n): Crea e inicializa el array "a" de tamaño "n" igual al numero de
+      elementos, que tendra las posiciones de los elementos a permutar y Calcula
+      el numero de iteraciones totales.
+    */
     public Permutator (int n) {
         if (n < 1) throw new IllegalArgumentException ("Min 1");
-        a = new int[n]; // array con las posiciones de los elementos
-        total = getFactorial (n);
+        a = new int[n]; // array que tendra las posiciones a mostrar de los elementos
+        total = getFactorial (n); // nº de iteraciones totales (n! porque estamos permutando)
         reset ();
     }
 
-    //------
-    // Reset
-    //------
-
+    /*
+      reset(): Inicializa el array con las posiciones de la 1º permutacion.
+    */
     public void reset () {
         for (int i = 0; i < a.length; i++) {
           a[i] = i;
@@ -33,18 +27,17 @@ public class Permutator {
         numLeft = total; // nº de permutaciones restantes
     }
 
-    //-----------------------------
-    // Are there more permutations?
-    //-----------------------------
-
+    /*
+      hasMore(): Devuelve true si quedan iteraciones restantes, false en caso
+      contrario.
+    */
     public boolean hasMore () {
         return numLeft > 0;
     }
 
-    //------------------
-    // Compute factorial
-    //------------------
-
+    /*
+      getFactorial(int n): Calcula el factorial de "n" y lo devuelve.
+    */
     private static long getFactorial (int n) {
         long fact = 1;
         for (int i = n; i > 1; i--) {
@@ -53,10 +46,9 @@ public class Permutator {
         return fact;
     }
 
-    //--------------------------------------------------------
-    // Generate next permutation (algorithm from Rosen p. 284)
-    //--------------------------------------------------------
-
+    /*
+      getNext(): devuelve el array "a" con las posiciones permutadas de elementos.
+    */
     public int[] getNext () {
         if (numLeft == total) {
           numLeft = numLeft - 1;
